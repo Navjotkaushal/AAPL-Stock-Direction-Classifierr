@@ -1,9 +1,7 @@
-# ─── Credentials ──────────────────────────────────────────────────────────────
-config.py
+# --- Secrets (NEVER commit these) ---
 .env
-*.env
 
-# ─── Python ───────────────────────────────────────────────────────────────────
+# --- Python ---
 __pycache__/
 *.py[cod]
 *.pyo
@@ -12,27 +10,28 @@ __pycache__/
 *.egg-info/
 dist/
 build/
+*.egg
 
-# ─── Virtual environment ──────────────────────────────────────────────────────
+# --- Virtual environments ---
 venv/
 .venv/
 env/
 
-# ─── Jupyter ──────────────────────────────────────────────────────────────────
+# --- Data & outputs (generated at runtime) ---
+data/*.csv
+data/*.parquet
+outputs/
+saved_models/*.pkl
+saved_models/*.joblib
+
+# --- Notebooks checkpoints ---
 .ipynb_checkpoints/
-*.ipynb
 
-# ─── ML outputs ───────────────────────────────────────────────────────────────
-*.png
-*.csv
-*.pkl
-*.joblib
-
-# ─── OS ───────────────────────────────────────────────────────────────────────
+# --- OS ---
 .DS_Store
 Thumbs.db
 
-# ─── IDE ──────────────────────────────────────────────────────────────────────
+# --- IDE ---
 .vscode/
 .idea/
-*.suo
+*.swp
