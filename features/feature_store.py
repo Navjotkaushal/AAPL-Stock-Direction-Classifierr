@@ -37,6 +37,11 @@ def load_features() -> pd.DataFrame:
     print(f"[feature_store] Loaded {len(df)} rows ← {STORE_PATH}")
     return df
 
+
+def features_exist() -> bool:
+    """Return True if a saved feature store is available on disk."""
+    return STORE_PATH.exists()
+    
     
 def delete_features() -> None:
     if STORE_PATH.exists():

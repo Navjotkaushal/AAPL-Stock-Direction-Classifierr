@@ -4,6 +4,7 @@ warnings.filterwarnings(action="ignore")
 from data.loader import load_from_db, get_connection
 from data.validator import data_validation, print_validation_report
 from features.engineer import add_features, prepare_Xy, time_split
+from features.pipeline import FeaturePipeline
 from models.train import train_all, save_models
 from models.tune import tune_all, build_base_models
 from models.evaluate import evaluate_all, plot_results, predict_tomorrow
@@ -44,10 +45,13 @@ def run_pipeline(tune=False):
 
         # ── Step 3: Feature Engineering ───────────────────────────────────────
         print("========== Layer 3: Feature Engineering ==========")
-        df_feat = add_features(df)
-        X, y, df_feat = prepare_Xy(df_feat)
-        X_train, X_test, y_train, y_test = time_split(X, y, test_size=TEST_SIZE)
+        obj = FeaturePipeline()
+        X_train, X_test, y_train, y_test, df_feat = obj.full_run(df)
         print(f"Train: {len(X_train)} rows | Test: {len(X_test)} rows\n")
+        # df_feat = add_features(df)
+        # X, y, df_feat = prepare_Xy(df_feat)
+        # X_train, X_test, y_train, y_test = time_split(X, y, test_size=TEST_SIZE)
+        # print(f"Train: {len(X_train)} rows | Test: {len(X_test)} rows\n")
 
         # ── Baseline (always-UP accuracy) — used for comparison ───────────────
         baseline_acc = float(y_test.mean())

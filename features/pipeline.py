@@ -17,7 +17,7 @@ class FeaturePipeline:
         self.force_recompute = force_recompute
         self.test_size = TEST_SIZE 
         
-    def run(self, df_raw: pd.DataFrame) -> DataFrame:
+    def run(self, df_raw: pd.DataFrame) -> pd.DataFrame:
         
         if not self.force_recompute and features_exist():
             print("[FeaturePipeline] Loading features from the store (use force_recmpute= True to refresh).")
