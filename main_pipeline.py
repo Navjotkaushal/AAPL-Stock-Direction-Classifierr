@@ -16,6 +16,7 @@ def run_pipeline(tune=False):
         # ── Step 1: Load ──────────────────────────────────────────────────────
         print("========== Layer 1: Loading Data ==========")
         df = load_from_db(conn)
+        df = df.copy()
         if df.empty:
             raise ValueError("No data in DB. Run ingest.py before running the pipeline.")
         print(f"Loaded {df.shape[0]} rows, {df.shape[1]} cols\n")

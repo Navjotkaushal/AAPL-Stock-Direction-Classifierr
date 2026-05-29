@@ -45,7 +45,7 @@ def add_features(df: pd.DataFrame) -> pd.DataFrame:
     
     df["macd"] = df["ema_12"] - df["ema_26"]
     df["macd_signal"] = df["macd"].ewm(span=9, adjust=False).mean()
-    df["macd_hist"] = df["macd"] = df["macd_signal"]
+    df["macd_hist"] = df["macd"] - df["macd_signal"]
     
     
     
@@ -118,7 +118,7 @@ def time_split(X, y, test_size = TEST_SIZE):
     n = len(X)
     cutoff = int(n * (1 - test_size))
     
-    X_train, X_test = X.iloc[:cutoff], X.iloc[:cutoff]
-    y_train, y_test = y.iloc[:cutoff], y.iloc[:cutoff]
+    X_train, X_test = X.iloc[:cutoff], X.iloc[cutoff:]
+    y_train, y_test = y.iloc[:cutoff], y.iloc[cutoff:]
     
     return X_train, X_test, y_train, y_test
